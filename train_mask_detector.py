@@ -19,6 +19,26 @@ from imutils import paths
 import matplotlib.pyplot as plt
 import numpy as np
 import os
+CATEGORIES = ["with_mask", "without_mask"]
+
+# grab the list of images in our dataset directory, then initialize
+# the list of data (i.e., images) and class images
+print("[INFO] loading images...")
+
+data = []
+labels = []
+
+for category in CATEGORIES:
+    path = os.path.join(DIRECTORY, category)
+    for img in os.listdir(path):
+    	img_path = os.path.join(path, img)
+    	image = load_img(img_path, target_size=(224, 224))
+    	image = img_to_array(image)
+    	image = preprocess_input(image)
+
+    	data.append(image)
+    	labels.append(category)
+
 
 # initialize the initial learning rate, number of epochs to train for,
 # and batch size
